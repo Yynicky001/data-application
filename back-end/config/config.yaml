@@ -1,0 +1,19 @@
+server:
+  domain: github-data-evaluator
+  port: 4001
+  host: 127.0.0.1
+  version: v1.0.0
+
+
+mysql:
+  host: ${GITHUB_EVALUATOR_MYSQL_HOST}
+  port: ${GITHUB_EVALUATOR_MYSQL_PORT:3306}
+  driverName: mysql
+  database: github-evaluator
+  username: root
+  password: ${GITHUB_EVALUATOR_MYSQL_PASSWORD}
+  charset: utf8mb4
+  defaultStringSize: 256
+  maxIdleConn: 20
+  maxOpenConn: 100
+  maxConnLifeTime: 30
