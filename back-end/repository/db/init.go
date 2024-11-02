@@ -1,6 +1,7 @@
 package db
 
 import (
+	"context"
 	"github-data-evaluator/config"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -39,5 +40,12 @@ func InitDB() {
 	sqlDB.SetConnMaxLifetime(time.Duration(mysqlConf.MaxLifetime) * time.Second)
 	_db = db
 
-	migration()
+	if mysqlConf.Migrate {
+		migration()
+	}
+}
+
+func NewDBClient(ctx context.Context) *gorm.DB {
+	db := _db
+	return db.WithContext(ctx)
 }

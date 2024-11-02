@@ -17,3 +17,9 @@ mysql:
   maxIdleConn: 20
   maxOpenConn: 100
   maxConnLifeTime: 30
+  migrate: true
+
+github:
+  token: ${GITHUB_TOKEN}
+  repo: true
+  developer: true

@@ -8,8 +8,9 @@ import (
 var Conf *Config
 
 type Config struct {
-	Server *Server
-	Mysql  *Mysql
+	Server *Server `yaml:"server"`
+	Mysql  *Mysql  `yaml:"mysql"`
+	GitHub *GitHub `yaml:"github"`
 }
 
 type Server struct {
@@ -31,6 +32,13 @@ type Mysql struct {
 	MaxOpenConn       int    `yaml:"maxOpenConn"`
 	MaxLifetime       int    `yaml:"maxLifetime"`
 	DefaultStringSize uint   `yaml:"defaultStringSize"`
+	Migrate           bool   `yaml:"migrate"`
+}
+
+type GitHub struct {
+	Token     string `yaml:"token"`
+	Repo      bool   `yaml:"repo"`
+	Developer bool   `yaml:"developer"`
 }
 
 func InitConfig() {

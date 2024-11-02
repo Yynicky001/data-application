@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github-data-evaluator/api"
 	"github-data-evaluator/config"
 	"github-data-evaluator/pkg/utils"
 	"github-data-evaluator/repository/db"
@@ -8,13 +9,12 @@ import (
 
 func main() {
 	loading()
-	utils.FetchStart()
-
+	api.FetchDeveloperStart()
 }
 
 func loading() {
 	utils.InitLog()
 	config.InitConfig()
 	db.InitDB()
-	utils.InitGithubClient()
+	api.InitGithubClient()
 }
