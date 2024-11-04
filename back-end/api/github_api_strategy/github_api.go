@@ -1,4 +1,4 @@
-package api
+package github_api_strategy
 
 import (
 	"context"
@@ -20,12 +20,15 @@ var (
 	batchSize       = 200 //批量存储到数据库的大小
 )
 
-// FetchDeveloperStart 开始拉取开发者信息
-func FetchDeveloperStart() {
+type GitHubAPIDefaultStrategy struct{}
+
+// Fetch GitHubAPI拉取策略
+func (g *GitHubAPIDefaultStrategy) Fetch() {
 	wg = &sync.WaitGroup{}
 	var perPage = 100
 	opts := &github.UserListOptions{ListOptions: github.ListOptions{PerPage: perPage}}
 	opts.Page = 1
+	opts.Since = 0
 	for {
 		users, response, err := client.Users.ListAll(context.Background(), opts)
 
@@ -42,7 +45,7 @@ func FetchDeveloperStart() {
 			utils.LogrusObj.Infoln("All users fetched.")
 			break
 		}
-		opts.Since = opts.Since + int64(perPage)
+		opts.Since = users[len(users)-1].GetID()
 	}
 	wg.Wait() // 等待所有goroutines完成
 	if len(developersBatch) > 0 {
@@ -56,7 +59,7 @@ func fetchUserDetailsConcurrently(user *github.User) {
 	semaphore <- struct{}{}        // 获取信号量
 	defer func() { <-semaphore }() // 释放信号量
 
-	utils.LogrusObj.Infoln("user data is processing: %s", user.GetLogin())
+	utils.LogrusObj.Infof("user data is processing: %s\n", user.GetLogin())
 	developersBatch = append(developersBatch, model.User2Developer(user))
 	if len(developersBatch) >= batchSize {
 		service.GetDeveloperService().BatchInsertDevelopers(developersBatch)
@@ -64,8 +67,8 @@ func fetchUserDetailsConcurrently(user *github.User) {
 	}
 }
 
-// InitGithubClient 初始化GitHub客户端
-func InitGithubClient() {
+// Init 初始化GitHub客户端
+func (g *GitHubAPIDefaultStrategy) Init() {
 	GithubToken := config.Conf.GitHub.Token
 	ts := oauth2.StaticTokenSource(
 		&oauth2.Token{AccessToken: GithubToken},

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github-data-evaluator/api"
+	strategy "github-data-evaluator/api/github_api_strategy"
 	"github-data-evaluator/config"
 	"github-data-evaluator/pkg/utils"
 	"github-data-evaluator/repository/db"
@@ -11,7 +11,7 @@ import (
 func main() {
 	loading()
 	serverStart()
-	//api.FetchStart()
+	//fetchStart()
 }
 
 func serverStart() {
@@ -23,6 +23,18 @@ func loading() {
 	utils.InitLog()
 	config.InitConfig()
 	db.InitDB()
-	api.InitGithubClient()
-	//api.InitGithubClientV4()
+}
+
+func fetchData() {
+	context := &strategy.GitHubAPIContext{}
+
+	if config.Conf.GitHub.Strategy == "v4" {
+		context.SetGitHubAPIContext(&strategy.GitHubAPIV4Strategy{})
+	} else if config.Conf.GitHub.Strategy == "default" {
+		context.SetGitHubAPIContext(&strategy.GitHubAPIDefaultStrategy{})
+	} else {
+		panic("unknown github api strategy")
+	}
+
+	context.Fetch()
 }

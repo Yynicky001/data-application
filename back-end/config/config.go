@@ -39,6 +39,7 @@ type GitHub struct {
 	Token     string `yaml:"token"`
 	Repo      bool   `yaml:"repo"`
 	Developer bool   `yaml:"developer"`
+	Strategy  string `yaml:"github_api_strategy"`
 }
 
 func InitConfig() {
