@@ -19,8 +19,15 @@ mysql:
   maxConnLifeTime: 30
   migrate: false
 
+neo4j:
+  host: ${GITHUB_EVALUATOR_NEO4J_HOST}
+  port: ${GITHUB_EVALUATOR_NEO4J_PORT}
+  username: ${GITHUB_EVALUATOR_NEO4J_USERNAME}
+  password: ${GITHUB_EVALUATOR_NEO4J_PASSWORD}
+  database: neo4j
+
 github:
   token: ${GITHUB_TOKEN}
   repo: true
   developer: true
-  strategy: default
+  strategy: v4

@@ -3,8 +3,8 @@ package dao
 import (
 	"context"
 	"github-data-evaluator/pkg/utils"
-	"github-data-evaluator/repository/db"
 	"github-data-evaluator/repository/model"
+	"github-data-evaluator/repository/mysql/db"
 	"gorm.io/gorm"
 	"sync"
 )
