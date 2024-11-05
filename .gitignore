@@ -4,3 +4,7 @@ logs
 *.log
 
 *.graphql
+
+.vscode
+
+node_modules
