@@ -4,25 +4,18 @@ import (
 	strategy "github-data-evaluator/api/github_api_strategy"
 	"github-data-evaluator/config"
 	"github-data-evaluator/pkg/utils"
-	"github-data-evaluator/repository/db"
 	"github-data-evaluator/router"
 )
 
 func main() {
-	loading()
-	serverStart()
+	utils.GetLogger().Info("akkk")
+	//serverStart()
 	//fetchStart()
 }
 
 func serverStart() {
 	r := router.NewRouter()
 	_ = r.Run(config.Conf.Server.Port)
-}
-
-func loading() {
-	utils.InitLog()
-	config.InitConfig()
-	db.InitDB()
 }
 
 func fetchData() {

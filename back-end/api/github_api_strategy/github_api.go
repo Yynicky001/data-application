@@ -33,16 +33,16 @@ func (g *GitHubAPIDefaultStrategy) Fetch() {
 		users, response, err := client.Users.ListAll(context.Background(), opts)
 
 		if err != nil {
-			utils.LogrusObj.Error("Error fetching users: %v", err)
+			utils.GetLogger().Errorf("Error fetching users: %v", err)
 		}
-		utils.LogrusObj.Infoln("Fetching users since ID: %d", opts.Since)
+		utils.GetLogger().Infof("Fetching users since ID: %d", opts.Since)
 		for _, user := range users {
 			wg.Add(1)
 			go fetchUserDetailsConcurrently(user)
 		}
 		if response.NextPage == 0 || response.StatusCode == 304 || opts.Since >= 100000 {
-			utils.LogrusObj.Warnf("%+v", response)
-			utils.LogrusObj.Infoln("All users fetched.")
+			utils.GetLogger().Infof("%+v", response)
+			utils.GetLogger().Infof("All users fetched.")
 			break
 		}
 		opts.Since = users[len(users)-1].GetID()
@@ -59,7 +59,7 @@ func fetchUserDetailsConcurrently(user *github.User) {
 	semaphore <- struct{}{}        // 获取信号量
 	defer func() { <-semaphore }() // 释放信号量
 
-	utils.LogrusObj.Infof("user data is processing: %s\n", user.GetLogin())
+	utils.GetLogger().Infof("user data is processing: %s\n", user.GetLogin())
 	developersBatch = append(developersBatch, model.User2Developer(user))
 	if len(developersBatch) >= batchSize {
 		service.GetDeveloperService().BatchInsertDevelopers(developersBatch)

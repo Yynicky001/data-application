@@ -9,6 +9,8 @@ type Contribution struct {
 	DeveloperID  int64 `json:"developer_id"`
 	RepositoryID int64 `json:"repository_id"`
 	Contribution int   `json:"contribution"`
+	Issues       int   `json:"issues"`
+	Prs          int   `json:"prs"`
 }
 
 func Conversion2Contribution(contribution *github.Contributor, repoId int64) *Contribution {

@@ -42,7 +42,7 @@ type GitHub struct {
 	Strategy  string `yaml:"github_api_strategy"`
 }
 
-func InitConfig() {
+func init() {
 	workDir, _ := os.Getwd()
 	viper.SetConfigName("config")
 	viper.SetConfigType("yaml")

@@ -2,7 +2,6 @@ package model
 
 import (
 	"github.com/google/go-github/v66/github"
-	"time"
 )
 
 type Repo struct {
@@ -15,8 +14,9 @@ type Repo struct {
 	Issue    int    `json:"issues"`   // issue数量
 	HTMLURL  string `json:"html_url"` // 仓库地址
 
-	CreatedAt time.Time `json:"created_at"` // 创建时间
-	UpdatedAt time.Time `json:"updated_at"` // 更新时间
+	CreatedAt    string         `json:"created_at"` // 创建时间
+	UpdatedAt    string         `json:"updated_at"` // 更新时间
+	Contribution []Contribution `json:"contribution" `
 }
 
 func Conversion2Repo(repo *github.Repository) *Repo {
@@ -30,7 +30,7 @@ func Conversion2Repo(repo *github.Repository) *Repo {
 		Issue:    repo.GetOpenIssuesCount(),
 		HTMLURL:  repo.GetHTMLURL(),
 
-		CreatedAt: repo.CreatedAt.Time,
-		UpdatedAt: repo.UpdatedAt.Time,
+		CreatedAt: repo.GetCreatedAt().String(),
+		UpdatedAt: repo.GetUpdatedAt().String(),
 	}
 }

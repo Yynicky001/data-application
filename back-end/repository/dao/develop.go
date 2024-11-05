@@ -26,21 +26,11 @@ func GetDeveloperDao() *DeveloperDao {
 }
 
 func (dd *DeveloperDao) BatchInsert(developers []*model.Developer) (err error) {
-	// 开启事务
-	tx := dd.DB.Begin()
-	if tx.Error != nil {
-		return tx.Error
-	}
-
 	// 执行批量插入，每次插入100条记录
 	batchSize := 100
-	if err := tx.CreateInBatches(developers, batchSize).Error; err != nil {
-		// 如果有错误发生，回滚事务
-		utils.LogrusObj.Errorln("Error inserting developers:", err)
-		tx.Rollback()
-		return err
+	err = dd.DB.CreateInBatches(developers, batchSize).Error
+	if err != nil {
+		utils.GetLogger().Errorf("Error inserting developers:", err)
 	}
-
-	// 提交事务
-	return tx.Commit().Error
+	return
 }

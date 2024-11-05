@@ -16,4 +16,5 @@ type DeveloperDetail struct {
 	Nation                string  `json:"nation"`                         //猜测的国籍
 	ConfidenceCoefficient float64 `json:"confidence_coefficient"`         //国籍置信度
 	Domain                string  `json:"domain"`                         //领域
+	CreatAt               string  `json:"created_at"`                     //创建时间
 }

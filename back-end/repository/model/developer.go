@@ -3,12 +3,12 @@ package model
 import (
 	"github.com/google/go-github/v66/github"
 	"gorm.io/gorm"
-	"time"
 )
 
 type Developer struct {
-	ID           int64          `json:"id"`                             //id
-	Login        string         `json:"login" gorm:"unique"`            //用户名
+	ID           int64          `json:"id" gorm:"primaryKey"` //id
+	DeveloperID  int64          `json:"developer_id" gorm:"unique"`
+	Login        string         `json:"login"`                          //用户名
 	Name         string         `json:"name"`                           //用户别名
 	HTMLURL      string         `json:"html_url" gorm:"not null"`       //用户主页
 	AvatarURL    string         `json:"avatar_url"`                     //头像url
@@ -17,13 +17,13 @@ type Developer struct {
 	Blog         string         `json:"blog"`                           //博客
 	Location     string         `json:"location"`                       //位置
 	Company      string         `json:"company"`                        //公司
-	CreatAt      time.Time      `json:"created_at"`                     //创建时间
+	CreatAt      string         `json:"created_at"`                     //创建时间
 	Contribution []Contribution `json:"contribution" gorm:"foreignKey:DeveloperID"`
 }
 
 func User2Developer(user *github.User) *Developer {
 	return &Developer{
-		ID:           user.GetID(),
+		DeveloperID:  user.GetID(),
 		Login:        user.GetLogin(),
 		Name:         user.GetName(),
 		HTMLURL:      user.GetHTMLURL(),
@@ -33,7 +33,7 @@ func User2Developer(user *github.User) *Developer {
 		Blog:         user.GetBlog(),
 		Location:     user.GetLocation(),
 		Company:      user.GetCompany(),
-		CreatAt:      user.GetCreatedAt().Time,
+		CreatAt:      user.GetCreatedAt().String(),
 	}
 }
 

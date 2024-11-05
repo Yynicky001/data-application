@@ -12,7 +12,7 @@ import (
 
 var _db *gorm.DB
 
-func InitDB() {
+func init() {
 	mysqlConf := config.Conf.Mysql
 	dsn := strings.Join([]string{mysqlConf.UserName, ":", mysqlConf.Password,
 		"@tcp(", mysqlConf.Host, ":", mysqlConf.Port, ")/",

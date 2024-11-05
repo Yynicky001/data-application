@@ -23,8 +23,8 @@ func GetDeveloperService() *DeveloperService {
 
 // BatchInsertDevelopers 批量存储开发者数据
 func (d *DeveloperService) BatchInsertDevelopers(batch []*model.Developer) {
-	utils.LogrusObj.Infoln("Inserted %d developers into the database.", len(batch))
+	utils.GetLogger().Infof("Inserted %d developers into the database.", len(batch))
 	if err := d.devDao.BatchInsert(batch); err != nil {
-		utils.LogrusObj.Errorln("Error inserting developers:", err)
+		utils.GetLogger().Errorf("Error inserting developers:", err)
 	}
 }
