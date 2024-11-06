@@ -1,5 +1,20 @@
 # DevInsight
 
+<div align=center>
+
+[![Static Badge](https://img.shields.io/badge/python-3.11.4-blue?style=flat)](https://www.python.org)
+[![Static Badge](https://img.shields.io/badge/go--github-v66.0.0-blue)](https://github.com/google/go-github)
+[![Static Badge](https://img.shields.io/badge/go--gorm-v1.26.0-red)](https://gorm.io)
+[![Static Badge](https://img.shields.io/badge/gin-v1.10.0-8A2BEA?style=flat)](https://pkg.go.dev/github.com/gin-gonic/gin)
+[![Static Badge](https://img.shields.io/badge/go-1.22.5-blue?style=flat)](https://pkg.go.dev/golang.org/dl/go1.22.5)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Static Badge](https://img.shields.io/badge/mysql-latest-green?style=flat)](https://www.mysql.com)
+[![Static Badge](https://img.shields.io/badge/neo4j-latest-green?style=flat)](https://neo4j.com/)
+
+
+</div>
+
+
 ### 题目要求
 
 #### 七牛云赛题: github数据应用
