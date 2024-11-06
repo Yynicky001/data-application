@@ -11,6 +11,7 @@ type Config struct {
 	Server *Server `yaml:"server"`
 	Mysql  *Mysql  `yaml:"mysql"`
 	GitHub *GitHub `yaml:"github"`
+	Neo4j  *Neo4j  `yaml:"neo4j"`
 }
 
 type Server struct {
@@ -18,6 +19,7 @@ type Server struct {
 	Port    string `yaml:"port"`
 	Host    string `yaml:"host"`
 	Version string `yaml:"version"`
+	Command string `yaml:"command"`
 }
 
 type Mysql struct {
@@ -36,10 +38,18 @@ type Mysql struct {
 }
 
 type GitHub struct {
-	Token     string `yaml:"token"`
-	Repo      bool   `yaml:"repo"`
-	Developer bool   `yaml:"developer"`
-	Strategy  string `yaml:"github_api_strategy"`
+	Token     []string `yaml:"token"`
+	Repo      bool     `yaml:"repo"`
+	Developer bool     `yaml:"developer"`
+	Strategy  string   `yaml:"github_api_strategy"`
+}
+
+type Neo4j struct {
+	Host     string `yaml:"host"`
+	Port     string `yaml:"port"`
+	UserName string `yaml:"username"`
+	Password string `yaml:"password"`
+	Database string `yaml:"database"`
 }
 
 func init() {
