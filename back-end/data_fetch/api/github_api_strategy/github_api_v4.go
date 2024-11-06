@@ -2,8 +2,9 @@ package github_api_strategy
 
 import (
 	"context"
-	"github-data-evaluator/pkg/utils"
-	"github-data-evaluator/repository/model"
+	"data_fetch/pkg/utils"
+	"data_fetch/repository/model"
+
 	"github.com/shurcooL/githubv4"
 )
 

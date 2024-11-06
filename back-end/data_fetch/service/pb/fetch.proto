@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "/service;service";
+
+// The data fetch service definition.
+service DataFetchService {
+  // A bidirectional streaming RPC.
+  rpc FetchDataStream (stream FetchRequest) returns (stream FetchResponse);
+}
+
+// The request message containing the initial parameters for the data fetch.
+message FetchRequest {
+  // Initial parameters can be added here if needed.
+}
+
+// The response message containing the status of the data fetch.
+message FetchResponse {
+  string status = 1; // Status message indicating the progress or result.
+}

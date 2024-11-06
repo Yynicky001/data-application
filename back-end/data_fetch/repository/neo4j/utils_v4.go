@@ -1,8 +1,8 @@
 package neo4j
 
 import (
-	"github-data-evaluator/pkg/utils"
-	"github-data-evaluator/repository/model"
+	"data_fetch/pkg/utils"
+	"data_fetch/repository/model"
 )
 
 func GenerateUserCypher() string {

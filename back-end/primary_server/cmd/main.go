@@ -1,7 +1,6 @@
 package main
 
 import (
-	strategy "github-data-evaluator/api/github_api_strategy"
 	"github-data-evaluator/config"
 	"github-data-evaluator/pkg/utils"
 	"github-data-evaluator/router"
@@ -26,12 +25,6 @@ func serverStart() {
 }
 
 func fetchData() {
-	c := &strategy.GitHubAPIContext{}
-	switch config.Conf.GitHub.Strategy {
-	case "v4":
-		c.SetGitHubAPIContext(&strategy.GitHubAPIV4Strategy{})
-	default:
-		c.SetGitHubAPIContext(&strategy.GitHubAPIDefaultStrategy{})
-	}
-	c.Fetch()
+	utils.GetLogger().Info("start fetch data")
+	// TODO: fetch data
 }

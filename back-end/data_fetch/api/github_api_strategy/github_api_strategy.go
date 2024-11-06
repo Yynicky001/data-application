@@ -2,8 +2,10 @@ package github_api_strategy
 
 import (
 	"context"
-	"github-data-evaluator/config"
+	"data_fetch/config"
+
 	"golang.org/x/oauth2"
+
 	"net/http"
 )
 

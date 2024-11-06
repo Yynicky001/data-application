@@ -2,8 +2,9 @@ package github_api_strategy
 
 import (
 	"context"
-	"github-data-evaluator/pkg/utils"
-	"github-data-evaluator/repository/neo4j"
+	"data_fetch/pkg/utils"
+	"data_fetch/repository/neo4j"
+
 	"github.com/google/go-github/v66/github"
 	"sync"
 )

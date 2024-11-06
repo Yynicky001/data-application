@@ -19,7 +19,6 @@ type Server struct {
 	Port    string `yaml:"port"`
 	Host    string `yaml:"host"`
 	Version string `yaml:"version"`
-	Command string `yaml:"command"`
 }
 
 type Mysql struct {
@@ -38,10 +37,8 @@ type Mysql struct {
 }
 
 type GitHub struct {
-	Token     []string `yaml:"token"`
-	Repo      bool     `yaml:"repo"`
-	Developer bool     `yaml:"developer"`
-	Strategy  string   `yaml:"github_api_strategy"`
+	Token    []string `yaml:"token"`
+	Strategy string   `yaml:"github_api_strategy"`
 }
 
 type Neo4j struct {

@@ -18,8 +18,14 @@ func NewRouter() *gin.Engine {
 	v1 := ginRouter.Group("/v1/github")
 
 	v1.GET("/rank", api.Rank())
-	v1.GET("/domain/rank")
-	v1.GET("/developer/details")
+
+	v1.GET("/domain/rank", api.RankByDomain())
+
+	v1.GET("/developer/details", api.DeveloperDetail())
+
+	v1.POST("/search", api.Search())
+
+	v1.POST("/about_us", api.About())
 
 	return ginRouter
 }

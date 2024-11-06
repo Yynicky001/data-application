@@ -44,3 +44,9 @@ func Rank() gin.HandlerFunc {
 
 	}
 }
+
+func RankByDomain() gin.HandlerFunc {
+	return func(c *gin.Context) {
+
+	}
+}

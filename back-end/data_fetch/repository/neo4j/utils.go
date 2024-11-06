@@ -1,7 +1,7 @@
 package neo4j
 
 import (
-	"github-data-evaluator/pkg/utils"
+	"data_fetch/pkg/utils"
 	"github.com/google/go-github/v66/github"
 )
 
