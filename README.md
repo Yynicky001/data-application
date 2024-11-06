@@ -17,4 +17,6 @@
 ### 代码架构
 
 - [后端代码](/back-end)
+  - [go业务部分](/back-end/primary_service)
+  - [python算法数据处理模块](/back-end/data_process_algo)
 - [前端代码](/front-end)

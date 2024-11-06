@@ -1,6 +1,7 @@
 package router
 
 import (
+	"github-data-evaluator/api"
 	"github-data-evaluator/middleware"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -16,7 +17,7 @@ func NewRouter() *gin.Engine {
 
 	v1 := ginRouter.Group("/v1/github")
 
-	v1.GET("/rank")
+	v1.GET("/rank", api.Rank())
 	v1.GET("/domain/rank")
 	v1.GET("/developer/details")
 

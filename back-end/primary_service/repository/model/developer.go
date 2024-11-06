@@ -6,8 +6,7 @@ import (
 )
 
 type Developer struct {
-	ID           int64          `json:"id" gorm:"primaryKey"` //id
-	DeveloperID  int64          `json:"developer_id" gorm:"unique"`
+	ID           int64          `json:"id" gorm:"primaryKey"`           //id
 	Login        string         `json:"login"`                          //用户名
 	Name         string         `json:"name"`                           //用户别名
 	HTMLURL      string         `json:"html_url" gorm:"not null"`       //用户主页
@@ -23,7 +22,7 @@ type Developer struct {
 
 func User2Developer(user *github.User) *Developer {
 	return &Developer{
-		DeveloperID:  user.GetID(),
+		ID:           user.GetID(),
 		Login:        user.GetLogin(),
 		Name:         user.GetName(),
 		HTMLURL:      user.GetHTMLURL(),
@@ -38,7 +37,7 @@ func User2Developer(user *github.User) *Developer {
 }
 
 // BeforeCreate GORM提供的钩子函数 BeforeCreate 在创建记录之前调用
-func (d *Developer) BeforeCreate(tx *gorm.DB) (err error) {
+func (d *Developer) BeforeCreate(_ *gorm.DB) (err error) {
 	if d.Name == "" {
 		d.Name = d.Login
 	}

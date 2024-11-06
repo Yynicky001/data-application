@@ -8,7 +8,6 @@ import (
 )
 
 func main() {
-
 	if f, exists := commandMap[config.Conf.Server.Command]; exists {
 		f()
 	} else {

@@ -6,7 +6,7 @@ import (
 
 func migration() {
 	err := _db.Set("gorm:table_options", "charset=utf8mb4").
-		AutoMigrate(&model.DeveloperRank{})
+		AutoMigrate(&model.Rank{})
 	if err != nil {
 		panic(err)
 	}
