@@ -8,9 +8,17 @@ import (
 )
 
 func main() {
-	utils.GetLogger().Info("akkk")
-	//serverStart()
-	//fetchStart()
+
+	if f, exists := commandMap[config.Conf.Server.Command]; exists {
+		f()
+	} else {
+		utils.GetLogger().Fatal("unknown environment")
+	}
+}
+
+var commandMap = map[string]func(){
+	"server": serverStart,
+	"fetch":  fetchData,
 }
 
 func serverStart() {
@@ -19,15 +27,12 @@ func serverStart() {
 }
 
 func fetchData() {
-	context := &strategy.GitHubAPIContext{}
-
-	if config.Conf.GitHub.Strategy == "v4" {
-		context.SetGitHubAPIContext(&strategy.GitHubAPIV4Strategy{})
-	} else if config.Conf.GitHub.Strategy == "default" {
-		context.SetGitHubAPIContext(&strategy.GitHubAPIDefaultStrategy{})
-	} else {
-		panic("unknown github api strategy")
+	c := &strategy.GitHubAPIContext{}
+	switch config.Conf.GitHub.Strategy {
+	case "v4":
+		c.SetGitHubAPIContext(&strategy.GitHubAPIV4Strategy{})
+	default:
+		c.SetGitHubAPIContext(&strategy.GitHubAPIDefaultStrategy{})
 	}
-
-	context.Fetch()
+	c.Fetch()
 }

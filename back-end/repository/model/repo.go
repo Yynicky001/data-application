@@ -1,9 +1,5 @@
 package model
 
-import (
-	"github.com/google/go-github/v66/github"
-)
-
 type Repo struct {
 	ID       int64  `json:"id"`       // 仓库id
 	Name     string `json:"name"`     // 仓库名
@@ -17,20 +13,4 @@ type Repo struct {
 	CreatedAt    string         `json:"created_at"` // 创建时间
 	UpdatedAt    string         `json:"updated_at"` // 更新时间
 	Contribution []Contribution `json:"contribution" `
-}
-
-func Conversion2Repo(repo *github.Repository) *Repo {
-	return &Repo{
-		ID:       repo.GetID(),
-		Name:     repo.GetName(),
-		OwnerID:  repo.GetOwner().GetID(),
-		Language: repo.GetLanguage(),
-		Stars:    repo.GetStargazersCount(),
-		Forks:    repo.GetForksCount(),
-		Issue:    repo.GetOpenIssuesCount(),
-		HTMLURL:  repo.GetHTMLURL(),
-
-		CreatedAt: repo.GetCreatedAt().String(),
-		UpdatedAt: repo.GetUpdatedAt().String(),
-	}
 }

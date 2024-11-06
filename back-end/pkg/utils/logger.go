@@ -140,6 +140,11 @@ func (l *Logger) Warn(msg string) {
 	l.logger.Warn(msg)
 }
 
+// Warnf Warn级别的格式化日志记录方法
+func (l *Logger) Warnf(format string, args ...interface{}) {
+	l.logger.Warnf(format, args...)
+}
+
 // Error 级别的日志记录方法
 func (l *Logger) Error(msg string) {
 	l.logger.Error(msg)
@@ -153,6 +158,11 @@ func (l *Logger) Errorf(format string, args ...interface{}) {
 // Fatal 级别的日志记录方法
 func (l *Logger) Fatal(msg string) {
 	l.logger.Fatal(msg)
+}
+
+// Fatalf Fatal级别的格式化日志记录方法
+func (l *Logger) Fatalf(format string, args ...interface{}) {
+	l.logger.Fatalf(format, args...)
 }
 
 // FileHook 用于将日志同时输出到文件
