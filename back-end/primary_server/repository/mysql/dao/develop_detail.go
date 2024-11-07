@@ -24,7 +24,7 @@ func GetDeveloperDetailDao(c context.Context) *DeveloperDetailDao {
 	return developerDetailDaoIns
 }
 
-func (d *DeveloperDetailDao) QueryDeveloperDetail(id int64) (developerDetail *model.DeveloperDetail, err error) {
-	err = d.db.Where("id = ?", id).First(&developerDetail).Error
+func (d *DeveloperDetailDao) QueryDeveloperDetail(login string) (developerDetail *model.DeveloperDetail, err error) {
+	err = d.db.Where("login = ?", login).First(&developerDetail).Error
 	return
 }

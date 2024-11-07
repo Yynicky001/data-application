@@ -8,7 +8,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/google/go-github/v66/github"
 	"net/http"
-	"strconv"
 )
 
 func Search() gin.HandlerFunc {
@@ -45,13 +44,12 @@ func Search() gin.HandlerFunc {
 
 func DeveloperDetail() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		value := c.Query("id")
-		id, err := strconv.Atoi(value)
-		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id parameter"})
+		login := c.Query("login")
+		if login == "" {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "login query parameter is required"})
 			return
 		}
-		developer, err := service.GetDeveloperDetailService(c).GetDeveloperDetail(int64(id))
+		developer, err := service.GetDeveloperDetailService(c).GetDeveloperDetail(login)
 		if err != nil {
 			c.JSON(500, gin.H{"error": "get developer detail error"})
 			return

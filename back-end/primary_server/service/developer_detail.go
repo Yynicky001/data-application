@@ -23,6 +23,6 @@ func GetDeveloperDetailService(c context.Context) *DeveloperDetailService {
 	return developerDetailServiceIns
 }
 
-func (d *DeveloperDetailService) GetDeveloperDetail(id int64) (developerDetail *model.DeveloperDetail, err error) {
-	return d.Dao.QueryDeveloperDetail(id)
+func (d *DeveloperDetailService) GetDeveloperDetail(login string) (developerDetail *model.DeveloperDetail, err error) {
+	return d.Dao.QueryDeveloperDetail(login)
 }
