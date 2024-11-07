@@ -24,11 +24,22 @@ func GetRankService(c context.Context) *RankService {
 	return rankServiceIns
 }
 
-// GetRankBy 分页获取排行榜
-func (r *RankService) GetRankBy(page, limit int) (ranks []*model.Rank, err error) {
+// GetPagesRank 分页获取排行榜
+func (r *RankService) GetPagesRank(page, limit int) (ranks []*model.Rank, err error) {
 	// 计算偏移量
 	offset := (page - 1) * limit
 	ranks, err = r.RankDao.QueryRankPages(limit, offset)
+	if err != nil {
+		utils.GetLogger().Errorf("GetRankBy failed, err: %v", err)
+		return nil, err
+	}
+	return ranks, nil
+}
+
+func (r *RankService) RankPagesByDomain(page, perPage int, domain string) ([]*model.Rank, error) {
+	// 计算偏移量
+	offset := (page - 1) * perPage
+	ranks, err := r.RankDao.QueryRankPagesByDomain(domain, perPage, offset)
 	if err != nil {
 		utils.GetLogger().Errorf("GetRankBy failed, err: %v", err)
 		return nil, err

@@ -43,24 +43,24 @@ func (g *GitHubAPIV4Strategy) Fetch() {
 		// ... and other fields
 	}
 
-	//for {
-	//	q := &UserQuery{}
-	//	err := clientV4.Query(context.Background(), q, variables)
-	//	if err != nil {
-	//		utils.GetLogger().Fatalf("Query failed: %v", err)
-	//	}
-	//
-	//	for _, user := range q.Search.Nodes {
-	//
-	//		//todo Process the user data
-	//		utils.GetLogger().Infof("process User: %v", user)
-	//		// ... and other fields
-	//	}
-	//
-	//	if !q.Search.PageInfo.HasNextPage {
-	//		break
-	//	}
-	//
-	//	variables["cursor"] = githubv4.NewString(q.Search.PageInfo.EndCursor)
-	//}
+	for {
+		q := &model.UserQuery{}
+		err := clientV4List[0].Query(context.Background(), q, variables)
+		if err != nil {
+			utils.GetLogger().Fatalf("Query failed: %v", err)
+		}
+
+		for _, user := range q.Search.Nodes {
+
+			//todo Process the user data
+			utils.GetLogger().Infof("process User: %v", user)
+			// ... and other fields
+		}
+
+		if !q.Search.PageInfo.HasNextPage {
+			break
+		}
+
+		variables["cursor"] = githubv4.NewString(q.Search.PageInfo.EndCursor)
+	}
 }

@@ -11,6 +11,7 @@ type Config struct {
 	Server *Server `yaml:"server"`
 	Mysql  *Mysql  `yaml:"mysql"`
 	Neo4j  *Neo4j  `yaml:"neo4j"`
+	ES     *ES     `yaml:"es"`
 }
 
 type Server struct {
@@ -44,11 +45,16 @@ type Neo4j struct {
 	Database string `yaml:"database"`
 }
 
+type ES struct {
+	Host string `yaml:"host"`
+	Port string `yaml:"port"`
+}
+
 func init() {
 	workDir, _ := os.Getwd()
 	viper.SetConfigName("config")
 	viper.SetConfigType("yaml")
-	viper.AddConfigPath(workDir + "/config")
+	viper.AddConfigPath(workDir + "\\config")
 	err := viper.ReadInConfig()
 	if err != nil {
 		panic(err)

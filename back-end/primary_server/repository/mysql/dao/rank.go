@@ -28,3 +28,8 @@ func (r *RankDao) QueryRankPages(pageSize, offset int) (ranks []*model.Rank, err
 	err = r.db.Model(&model.Rank{}).Order("rank_num DESC").Limit(pageSize).Offset(offset).Find(&ranks).Error
 	return
 }
+
+func (r *RankDao) QueryRankPagesByDomain(domain string, page int, offset int) (ranks []*model.Rank, err error) {
+	err = r.db.Model(&model.Rank{}).Order("rank_num DESC").Where("domain = ?", domain).Limit(page).Offset(offset).Find(&ranks).Error
+	return
+}

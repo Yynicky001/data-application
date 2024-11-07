@@ -30,23 +30,6 @@ func fetchUserDetails(user *github.User) {
 
 }
 
-//func fetchRepoData() {
-//	wg = &sync.WaitGroup{}
-//	index := 0
-//	client := clientList[index]
-//	// 获取仓库列表
-//	opt := &github.RepositoryListAllOptions{
-//		Since: 0,
-//	}
-//	for {
-//		all, response, err := client.Repositories.ListAll(context.Background(), opt)
-//		if err != nil {
-//			utils.GetLogger().Errorf("Error fetching repositories: %v", err)
-//		}
-//
-//	}
-//}
-
 // 拉取用户简略数据
 func fetchUserData() {
 	wg = &sync.WaitGroup{}

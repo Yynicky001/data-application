@@ -19,7 +19,9 @@ func NewRouter() *gin.Engine {
 
 	v1.GET("/rank", api.Rank())
 
-	v1.GET("/domain/rank", api.RankByDomain())
+	v1.GET("/domain", api.DomainList())
+
+	v1.POST("/domain/rank", api.RankByDomain())
 
 	v1.GET("/developer/details", api.DeveloperDetail())
 

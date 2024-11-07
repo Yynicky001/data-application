@@ -33,7 +33,6 @@ type Mysql struct {
 	MaxOpenConn       int    `yaml:"maxOpenConn"`
 	MaxLifetime       int    `yaml:"maxLifetime"`
 	DefaultStringSize uint   `yaml:"defaultStringSize"`
-	Migrate           bool   `yaml:"migrate"`
 }
 
 type GitHub struct {
@@ -53,7 +52,7 @@ func init() {
 	workDir, _ := os.Getwd()
 	viper.SetConfigName("config")
 	viper.SetConfigType("yaml")
-	viper.AddConfigPath(workDir + "/config")
+	viper.AddConfigPath(workDir + "\\config")
 	err := viper.ReadInConfig()
 	if err != nil {
 		panic(err)
