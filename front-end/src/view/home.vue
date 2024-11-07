@@ -25,29 +25,23 @@
 </template>
 
 <script setup>
-import { reactive, ref } from 'vue';
+import { provide, reactive, ref } from 'vue';
 import HomeBt from '../components/home-botton.vue';
 import HomeGeneral from '../components/general.vue';
 import HomeTalent from '../components/home-talent.vue';
-import HomeArea from '../components/home-area.vue';
+import HomeArea from '../components/home-domain.vue';
+import emit from '../declare/eventObserve';
+import HomeAbout from '../components/home-about.vue';
 
     const state=reactive({
         btData:[
             {
               text:'技术排行',
-              iconfont:'icon-gerenpaihang'
+              iconfont:'icon-shuju1'
             },
             {
               text:'领域热榜',
               iconfont:'icon-rebang'
-            },
-            // {
-            //   text:'开发者国籍',
-            //   iconfont:'icon-bangdan1'
-            // },
-            {
-              text:'数据详情',
-              iconfont:'icon-shuju1'
             },
             {
               text:'关于我们',
@@ -56,7 +50,8 @@ import HomeArea from '../components/home-area.vue';
         ],
         components:[
           HomeTalent,
-          HomeArea
+          HomeArea,
+          HomeAbout
         ],
         thisCom:HomeTalent,
         title:'技术排行'
@@ -78,8 +73,9 @@ import HomeArea from '../components/home-area.vue';
     const leftNav=ref(null);
     const hiddenBt=ref(null);
     const isHidden=ref(false);
-    
+
     const hidden=()=>{
+      emit.emit('chartChange',1)
       const setter=leftNav.value.querySelector('.setter');
       if(!isHidden.value){
         leftNav.value.style.width='0px';
