@@ -29,5 +29,7 @@ func NewRouter() *gin.Engine {
 
 	v1.POST("/about_us", api.About())
 
+	v1.POST("/charts", api.Charts())
+
 	return ginRouter
 }
