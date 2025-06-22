@@ -40,4 +40,4 @@
 
 ### 演示视频
 
-[vedio](/assert/vedio.mp4)
+[video](/assert/vedio.mp4)
